@@ -1,0 +1,23 @@
+-- Users Table CRUD Stored Procedures
+-- run this one to make it available
+-- psql -U mariavelandia -d socialnetwork -f src/main/resources/social_network_procedures.sql
+
+-- Drop existing procedures with the same names
+
+
+
+- psql -U mariavelandia -d socialnetwork -f src/main/resources/social_network_procedures.sql
+
+
+
+
+psql -U mariavelandia -d moviesdb -f src/main/resources/movies_schema.sql
+psql -U mariavelandia -d moviesdb -f src/main/resources/movies_procedures.sql
+
+
+
+To create large file for testing
+dd if=/dev/zero of=src/test/java/com/example/fileshare/files/large_test_file.txt bs=1M count=200
+
+psql -U mariavelandia -d filesharedb -f src/main/resources/file_share_schema.sql
+psql -U mariavelandia -d filesharedb -f src/main/resources/file_share_procedures.sql
