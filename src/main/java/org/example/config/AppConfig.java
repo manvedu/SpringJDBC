@@ -14,7 +14,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @EnableTransactionManagement
@@ -47,4 +51,10 @@ public class AppConfig {
         dataSource.setPassword("");
         return dataSource;
     }
+
+    @Bean
+    public HandlerExceptionResolver customExceptionResolver() {
+        return new CustomExceptionResolver();
+    }
+
 }
