@@ -6,6 +6,7 @@ import org.example.model.Ticket;
 import org.example.model.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/booking")
 public class BookingController {
 
@@ -76,6 +77,17 @@ public class BookingController {
         return modelAndView;
     }
 
+    @PostMapping("/preloadTickets")
+    public String preloadTickets(@RequestParam String filePath) {
+        try {
+            bookingFacade.preloadTickets(filePath);
+            return "Batch ticket creation successful";
+        } catch (Exception e) {
+            return "Failed to preload tickets: " + e.getMessage();
+        }
+    }
+
+/*
     @GetMapping(value = "/api/booking/getBookedTickets", produces = MediaType.APPLICATION_PDF_VALUE)
     public void getBookedTicketsPdf(
             @RequestParam Long userId,
@@ -110,6 +122,9 @@ public class BookingController {
 
         document.close();
     }
+
+ */
+
 
 
 }
