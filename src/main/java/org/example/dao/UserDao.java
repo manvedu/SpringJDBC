@@ -4,7 +4,9 @@ import org.example.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDao {
     private Map<Long, User> userStorage = new HashMap<>();
 

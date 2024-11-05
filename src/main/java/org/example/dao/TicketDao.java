@@ -4,7 +4,9 @@ import org.example.model.Ticket;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TicketDao {
     private Map<Long, Ticket> ticketStorage = new HashMap<>();
 

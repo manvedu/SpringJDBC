@@ -4,7 +4,9 @@ import org.example.model.Event;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class EventDao {
     private Map<Long, Event> eventStorage = new HashMap<>();
 
