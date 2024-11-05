@@ -12,5 +12,5 @@ public interface BookingFacade {
     Ticket bookTicket(Long id, Long eventId, Long userId, int seatNumber);
     User getUser(Long id);
     List<User> getUsersByName(String name);
-
+    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
 }

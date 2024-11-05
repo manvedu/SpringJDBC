@@ -10,6 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -58,7 +68,6 @@ public class BookingController {
         return modelAndView;
     }
 
-    // Method to display users by name
     @GetMapping("/getUsersByName")
     public ModelAndView getUsersByName(@RequestParam String name) {
         List<User> users = bookingFacade.getUsersByName(name);
@@ -66,4 +75,41 @@ public class BookingController {
         modelAndView.addObject("users", users);
         return modelAndView;
     }
+
+    @GetMapping(value = "/api/booking/getBookedTickets", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void getBookedTicketsPdf(
+            @RequestParam Long userId,
+            @RequestParam int pageSize,
+            @RequestParam int pageNum,
+            @RequestHeader(HttpHeaders.ACCEPT) String acceptHeader,
+            HttpServletResponse response) throws IOException, DocumentException {
+
+        if (!MediaType.APPLICATION_PDF_VALUE.equals(acceptHeader)) {
+            throw new IllegalArgumentException("This endpoint only supports PDF responses.");
+        }
+
+        User user = bookingFacade.getUser(userId);
+        List<Ticket> tickets = bookingFacade.getBookedTickets(user, pageSize, pageNum);
+
+        // Set the content type and create the PDF document
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        Document document = new Document();
+        PdfWriter.getInstance(document, response.getOutputStream());
+        document.open();
+
+        // Add content to the PDF
+        document.add(new Paragraph("Booked Tickets for User: " + user.getName()));
+        document.add(new Paragraph("Email: " + user.getEmail()));
+        document.add(new Paragraph(" ")); // Add space
+
+        for (Ticket ticket : tickets) {
+            document.add(new Paragraph("Ticket ID: " + ticket.getId() +
+                    ", Event ID: " + ticket.getEventId() +
+                    ", Seat Number: " + ticket.getSeatNumber()));
+        }
+
+        document.close();
+    }
+
+
 }

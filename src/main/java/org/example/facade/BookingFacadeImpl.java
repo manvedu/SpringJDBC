@@ -46,5 +46,9 @@ public class BookingFacadeImpl implements BookingFacade{
         return userService.getUsersByName(name);
     }
 
+    @Override
+    public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
+        return ticketService.getBookedTickets(user, pageSize, pageNum);
+    }
 
 }

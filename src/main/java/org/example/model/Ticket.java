@@ -16,4 +16,7 @@ public class Ticket {
     public Long getId() {
         return id;
     }
+    public Long getEventId() { return eventId; }
+    public Long getUserId() { return userId; }
+    public int getSeatNumber() { return seatNumber; }
 }
