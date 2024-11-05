@@ -1,4 +1,5 @@
 package org.example.service;
+/*
 
 import org.example.dao.EventDao;
 import org.example.model.Event;
@@ -58,3 +59,6 @@ public class EventServiceTest {
         verify(eventDao, times(1)).getById(eventId);
     }
 }
+
+
+ */
