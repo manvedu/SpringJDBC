@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -28,5 +29,10 @@ public class UserService {
     public User getUser(Long id) {
         logger.info("UserService - getUser by id: " + id);
         return userDao.getById(id);
+    }
+
+    public List<User> getUsersByName(String name) {
+        logger.info("UserService - getUsersByName: " + name);
+        return userDao.findByName(name);
     }
 }

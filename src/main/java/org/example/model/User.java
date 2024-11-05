@@ -20,4 +20,9 @@ public class User {
         System.out.println("User model getId");
         return name;
     }
+
+    public String getEmail() {
+        System.out.println("User model getEmail");
+        return email;
+    }
 }

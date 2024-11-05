@@ -4,8 +4,13 @@ import org.example.model.User;
 import org.example.model.Event;
 import org.example.model.Ticket;
 
+import java.util.List;
+
 public interface BookingFacade {
     User createUser(Long id, String name, String email);
     Event createEvent(Long id, String title, String description, String date);
     Ticket bookTicket(Long id, Long eventId, Long userId, int seatNumber);
+    User getUser(Long id);
+    List<User> getUsersByName(String name);
+
 }

@@ -7,6 +7,8 @@ import org.example.service.EventService;
 import org.example.service.TicketService;
 import org.example.service.UserService;
 
+import java.util.List;
+
 public class BookingFacadeImpl implements BookingFacade{
 
     private final UserService userService;
@@ -33,4 +35,16 @@ public class BookingFacadeImpl implements BookingFacade{
     public Ticket bookTicket(Long id, Long eventId, Long userId, int seatNumber) {
         return ticketService.bookTicket(id, eventId, userId, seatNumber);
     }
+
+    @Override
+    public User getUser(Long id) {
+        return userService.getUser(id);
+    }
+
+    @Override
+    public List<User> getUsersByName(String name) {
+        return userService.getUsersByName(name);
+    }
+
+
 }

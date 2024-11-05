@@ -5,8 +5,14 @@ import org.example.model.Event;
 import org.example.model.Ticket;
 import org.example.model.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/api/booking")
 public class BookingController {
 
@@ -37,5 +43,27 @@ public class BookingController {
                              @RequestParam Long userId,
                              @RequestParam int seatNumber) {
         return bookingFacade.bookTicket(id, eventId, userId, seatNumber);
+    }
+
+    @GetMapping("/getUser")
+    public ModelAndView getUser(@RequestParam Long id) {
+        User user = bookingFacade.getUser(id);
+        ModelAndView modelAndView = new ModelAndView("user");
+        if (user != null) {
+            modelAndView.addObject("user", user);
+        } else {
+            modelAndView.setViewName("error");  // Redirects to an error template if user not found
+            modelAndView.addObject("message", "User not found.");
+        }
+        return modelAndView;
+    }
+
+    // Method to display users by name
+    @GetMapping("/getUsersByName")
+    public ModelAndView getUsersByName(@RequestParam String name) {
+        List<User> users = bookingFacade.getUsersByName(name);
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", users);
+        return modelAndView;
     }
 }
