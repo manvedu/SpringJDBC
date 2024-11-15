@@ -1,0 +1,18 @@
+# Users: id,name,email
+users
+1,Elvis Presley,elvis@presley.com
+2,Michael Jackson,michael@algo.com
+3,Rocio Durcal,rocio@something.com
+4,Juan Gabriel,juan@someother.com
+
+# Events: id,title, description,date
+events
+1,Java Conference,A java conference for showing features,2024-10-10
+2,Cordillera Fest, Music fest, 2024-11-20
+
+# Tickets: id,userId,eventId,seatNumber
+tickets
+1,1,2,001
+2,2,1,002
+3,3,2,003
+4,4,2,004

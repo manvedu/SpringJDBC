@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- DAO Beans -->
+    <bean id="userDao" class="org.example.dao.UserDao"/>
+    <bean id="eventDao" class="org.example.dao.EventDao"/>
+    <bean id="ticketDao" class="org.example.dao.TicketDao"/>
+
+    <!-- Service Beans with dao bean with autowire -->
+    <bean id="userService" class="org.example.service.UserService" autowire="byType"/>
+    <bean id="eventService" class="org.example.service.EventService" autowire="byType"/>
+    <bean id="ticketService" class="org.example.service.TicketService" autowire="byType"/>
+
+    <bean id="storageInitializer" class="org.example.initializer.StorageInitializer">
+        <property name="dataFilePath" value="${data.file.path}"/>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:application.properties"/>
+    </bean>
+
+    <!-- BookingFacade Bean with constructor-based injection -->
+    <bean id="bookingFacade" class="org.example.facade.BookingFacadeImpl">
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="eventService"/>
+        <constructor-arg ref="ticketService"/>
+    </bean>
+</beans>
